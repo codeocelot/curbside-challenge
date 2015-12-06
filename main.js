@@ -10,7 +10,7 @@ function getSessionId(cb){
 	})
 }
 
-function getNode(id,cb,history){
+function getNode(id,history){
 	reqOptions.url='http://challenge.shopcurbside.com/'+id;
 	return new Promise((resolve,reject)=>{
 		request(reqOptions,(err,response,body)=>{
@@ -19,7 +19,7 @@ function getNode(id,cb,history){
 			if(body.error){
 				if(body.error === 'Page not found') return resolve();
 				return getSessionId(()=>{
-					resolve(getNode(id,null,history));
+					resolve(getNode(id,history));
 				})
 			}
 			if(body.secret){
@@ -29,12 +29,12 @@ function getNode(id,cb,history){
 			else{
 				if(Array.isArray(body.next)){
 					var promises = body.next.map((n,i)=>{
-						return getNode(n,null,history+i);
+						return getNode(n,history+i);
 					})
 					Promise.all(promises).then(results=>resolve(results))
 				} else {
 					resolve(
-						getNode(body.next,null,history+0)
+						getNode(body.next,history+0)
 					);
 				}
 			}
@@ -55,7 +55,7 @@ function sortNodes(arr){
 }
 
 // kickoff
-getNode('start',null,'').then(nodes=>{
+getNode('start','').then(nodes=>{
 	nodes = _.flatten(nodes);
 	nodes = rmNulls(nodes);
 	var sorted = sortNodes(nodes);
