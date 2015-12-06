@@ -60,9 +60,11 @@ function getMessage(){
 		nodes = _.flatten(nodes);
 		nodes = rmNulls(nodes);
 		var sorted = sortNodes(nodes);
-		sorted.forEach(s=>console.log(s.secret))
+		sorted.forEach(s=>process.stdout.write(s.secret))
 	});
 }
+
+getMessage();
 
 module.exports = getMessage;
 module.exports.getNode = getNode; // expose for tests.

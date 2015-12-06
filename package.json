@@ -2,15 +2,14 @@
   "name": "tree-traverse",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
+    "start" : "node main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "codeocelot",
   "license": "ISC",
   "dependencies": {
-    "co": "^4.6.0",
-    "co-request": "^1.0.0",
     "request": "^2.67.0",
     "underscore": "^1.8.3"
   }
