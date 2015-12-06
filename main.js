@@ -54,10 +54,15 @@ function sortNodes(arr){
 	})
 }
 
-// kickoff
-getNode('start','').then(nodes=>{
-	nodes = _.flatten(nodes);
-	nodes = rmNulls(nodes);
-	var sorted = sortNodes(nodes);
-	sorted.forEach(s=>console.log(s.secret))
-});
+function getMessage(){
+	// kickoff
+	getNode('start','').then(nodes=>{
+		nodes = _.flatten(nodes);
+		nodes = rmNulls(nodes);
+		var sorted = sortNodes(nodes);
+		sorted.forEach(s=>console.log(s.secret))
+	});
+}
+
+module.exports = getMessage;
+module.exports.getNode = getNode; // expose for tests.
